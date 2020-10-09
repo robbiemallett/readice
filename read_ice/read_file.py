@@ -194,17 +194,17 @@ def AMSR_E(file_location, freq, pol, hemisphere,
 
 
 if __name__ == '__main__':
-
-    from tools import plot
-    import pickle
-
-    #### PIOMAS Plot ####
-
-    array = piomas('tests/test_files/heff.H1993',with_coords=True)
-
-    plot(array['lon'], array['lat'], array['data'][0])
-
-    pickle.dump(array['data'], open('tests/test_results/piomas.p', 'wb'))
+    pass
+    # from tools import plot
+    # import pickle
+    #
+    # #### PIOMAS Plot ####
+    #
+    # array = piomas('tests/test_files/heff.H1993',with_coords=True)
+    #
+    # plot(array['lon'], array['lat'], array['data'][0])
+    #
+    # pickle.dump(array['data'], open('tests/test_results/piomas.p', 'wb'))
 
 
     #### AMSR Plots ####

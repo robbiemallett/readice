@@ -1,7 +1,7 @@
 import unittest
 import pickle
 import numpy as np
-from read_ice.read_bin import SSMI_Tb, concentration, piomas
+from read_ice.read_file import SSMI_Tb, concentration, piomas
 from read_ice.tools import plot
 import matplotlib.pyplot as plt
 import os
