@@ -1,15 +1,15 @@
 language: python
 python:
-  - 3.8
+  - 3.6
 before_install:
   - python --version
   - pip install -U pip
   - pip install codecov
-  - python3 pip/setup.py install
+  - python pip/setup.py install
   - chmod +x tests/test_read_file.py
   - chmod +x tests/test_geo_coords.py
 script:
   - python3 tests/test_read_file.py
   - python3 tests/test_geo_coords.py
 after_success:
-  - codecov(base)
+  - codecov
