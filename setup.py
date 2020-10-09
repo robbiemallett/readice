@@ -12,6 +12,7 @@ setuptools.setup(
                       'scipy',
                       'matplotlib',
                       'docutils',
+                      'pyproj',
                       'Pygments',
                       'netCDF4',
                       'cartopy'],
