@@ -2,6 +2,59 @@ import cartopy.crs as ccrs
 import cartopy
 import matplotlib.pyplot as plt
 import numpy as np
+import xarray as xr
+
+def dict_to_nc(input_dict,
+                output_file_destination,
+                variable_name,
+                attributes=None):
+    """ Takes a dict with 'data', 'lon', 'lat' keys and outputs a netcdf file.
+
+    Args:
+    input_dict (dict): 'data', 'lon', 'lat' keys. 'data' value must be 2 or 3d numpy array with two dims matching those of
+    'lon' and 'lat' values.
+    output_file_destination (str): destination of the file and filename (e.g. ~/robbie/my_netcdf.nc)
+    variable_name (str): name for the netcdf variable (e.g. 'Brightness Temperature' or 'Sea Ice Thickness').
+    attributes (dict): dictionary of netcdf attributes. (e.g. {'year':2016, 'creator': 'Robbie Mallett'}
+
+    Returns:
+        0 if all runs successfully.
+
+    """
+
+    check_dictionary_health(input_dict)
+
+    if len(input_dict['data'].shape) == 3:
+
+
+        coords = {'lon': (['x', 'y'], input_dict['lon']),
+                  'lat': (['x', 'y'], input_dict['lat']),
+                  'month': (['t'], np.array(range(input_dict['data'].shape[0])))}
+
+        variable = {f'{variable_name}': (['t', 'x', 'y'], input_dict['data'])}
+
+    elif len(input_dict['data'].shape) == 2:
+
+        coords = {'lon': (['x', 'y'], input_dict['lon']),
+                  'lat': (['x', 'y'], input_dict['lat'])}
+
+        variable = {f'{variable_name}': (['x', 'y'], input_dict['data'])}
+
+    else:
+        coords, variable = None, None
+        raise Exception("read_ice currently only supports 2 & 3 dimensional arrays.")
+
+    ds = xr.Dataset(data_vars= variable,
+                    coords=coords)
+
+    if attributes:
+        for attribute in list(attributes.keys()):
+            ds.attrs[attribute] = attributes[attribute]
+
+
+    ds.to_netcdf(f'{output_file_destination}', 'w')
+
+    return(0)
 
 
 def plot(lon,
@@ -41,11 +94,10 @@ def plot(lon,
         Nothing.
     """
 
-    # Make plot
     if figsize:
-        fig = plt.figure(figsize=figsize)
+        fig = plt.subplots(1,1,figsize=figsize)
     else:
-        fig = plt.figure()
+        fig = plt.subplots()
 
     if hemisphere == 's':
         bounding_lat = -abs(bounding_lat)
@@ -74,10 +126,13 @@ def plot(lon,
     if data.shape == lat.shape:
         data = data[:-1,:-1]
 
-    plt.pcolormesh(np.array(lon), np.array(lat), np.array(data), vmin=vmin, vmax=vmax,
-                   transform=ccrs.PlateCarree(), zorder=0, cmap=color_scheme)
+    mesh = ax.pcolormesh(np.array(lon), np.array(lat), np.array(data),
+                   vmin=vmin, vmax=vmax,
+                   transform=ccrs.PlateCarree(), zorder=0,
+                   cmap=color_scheme,
+                   )
 
-    plt.colorbar()
+    plt.colorbar(mesh)
 
     plt.tight_layout()
 
@@ -86,3 +141,18 @@ def plot(lon,
 
     if show == True:
         plt.show()
+
+    return(0)
+
+def check_dictionary_health(input_dict):
+
+    if len(input_dict['data'].shape) == 3:
+        data_shape = input_dict['data'].shape
+        assert data_shape[1:] == input_dict['lon'].shape
+        assert input_dict['lon'].shape == input_dict['lat'].shape
+
+    elif len(input_dict['data'].shape) == 2:
+
+        data_shape = input_dict['data'].shape
+        assert data_shape == input_dict['lon'].shape
+        assert input_dict['lon'].shape == input_dict['lat'].shape
