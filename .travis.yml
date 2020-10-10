@@ -19,7 +19,7 @@ install:
   - conda info -a
 
   # Replace dep1 dep2 ... with your dependencies
-  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION pandas numpy scipy matplotlib docutils pyproj Pygments netCDF4 cartopy
+  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION pandas numpy scipy matplotlib docutils pyproj Pygments netCDF4 cartopy xarray
   - conda activate test-environment
   - python pip/setup.py install
 
@@ -27,21 +27,3 @@ script:
   # Your test script goes here
   - python3 tests/test_read_file.py
   - python3 tests/test_geo_coords.py
-
-
-
-#language: python
-#python:
-#  - 3.6
-#before_install:
-#  - python --version
-#  - pip install -U pip
-#  - pip install codecov
-#  - python setup.py install
-#  - chmod +x tests/test_read_file.py
-#  - chmod +x tests/test_geo_coords.py
-#script:
-#  - python3 tests/test_read_file.py
-#  - python3 tests/test_geo_coords.py
-#after_success:
-#  - codecov

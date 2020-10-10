@@ -25,7 +25,7 @@ author = 'Robbie Mallett'
 # The full version, including alpha/beta/rc tags
 release = 'v0.0.1'
 
-autodoc_mock_imports = ['pandas','numpy','matplotlib','scipy', 'netCDF4','cartopy']
+autodoc_mock_imports = ['pandas','numpy','matplotlib','scipy', 'netCDF4','cartopy','xarray']
 
 
 # -- General configuration ---------------------------------------------------
