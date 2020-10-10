@@ -194,16 +194,24 @@ def AMSR_E(file_location, freq, pol, hemisphere,
 
 
 if __name__ == '__main__':
-    pass
-    # from tools import plot
-    # import pickle
-    #
-    # #### PIOMAS Plot ####
+    # pass
+    from tools import plot, dict_to_nc
+    import matplotlib.pyplot as plt
+    import pickle
+    import cartopy.crs as ccrs
+    import cartopy
+
+    #### PIOMAS Plot ####
     #
     # array = piomas('tests/test_files/heff.H1993',with_coords=True)
     #
-    # plot(array['lon'], array['lat'], array['data'][0])
+    # plt.imshow(array['data'][0])
+    # plt.show()
+
+    # dict_to_nc(array, '../test.nc', 'SIT')
     #
+    # plot(array['lon'], array['lat'], array['data'][0])
+
     # pickle.dump(array['data'], open('tests/test_results/piomas.p', 'wb'))
 
 
@@ -215,8 +223,10 @@ if __name__ == '__main__':
     #                 hemisphere='n',
     #                 freq=36,
     #                 pol='V',with_coords=True)
+
+    # dict_to_nc(array, '../test2.nc', 'SIT')
     #
-    # plot(array['lon'], array['lat'], array['data'])
+    # plot(array['lon'], array['lat'], array['data'],show=True,hemisphere='n', figsize=(5,5))
 
 
     #### SSMI Plots ####
