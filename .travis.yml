@@ -22,6 +22,7 @@ install:
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION pandas numpy scipy matplotlib docutils pyproj Pygments netCDF4 cartopy xarray
   - conda activate test-environment
   - python pip/setup.py install
+  - ls
 
 script:
   # Your test script goes here
