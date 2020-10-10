@@ -13,7 +13,7 @@ setuptools.setup(
                       'matplotlib',
                       'docutils',
                       'pyproj',
-                      'xarray'
+                      'xarray',
                       'Pygments',
                       'netCDF4',
                       'cartopy'],
