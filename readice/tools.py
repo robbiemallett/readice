@@ -1,8 +1,8 @@
+import numpy as np
+import xarray as xr
 import cartopy.crs as ccrs
 import cartopy
 import matplotlib.pyplot as plt
-import numpy as np
-import xarray as xr
 
 def dict_to_nc(input_dict,
                 output_file_destination,
@@ -42,7 +42,7 @@ def dict_to_nc(input_dict,
 
     else:
         coords, variable = None, None
-        raise Exception("read_ice currently only supports 2 & 3 dimensional arrays.")
+        raise Exception("readice currently only supports 2 & 3 dimensional arrays.")
 
     ds = xr.Dataset(data_vars= variable,
                     coords=coords)

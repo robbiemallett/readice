@@ -1,8 +1,5 @@
-import struct
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-
 
 def get_dims(proj, resolution, hemisphere):
 

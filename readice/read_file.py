@@ -231,12 +231,15 @@ if __name__ == '__main__':
 
     #### SSMI Plots ####
 
-    # # Northern hemisphere 37 GHz
-    #
-    # array = SSMI_Tb('tests/test_files/tb_f17_20190711_v5_n37h.bin',
-    #                     'n', 37,with_coords=True)
-    #
-    # plot(array['lon'], array['lat'], array['data'])
+    # Northern hemisphere 37 GHz
+
+    array = SSMI_Tb('tests/test_files/tb_f17_20190711_v5_n37h.bin',
+                        'n', 37,with_coords=True)
+
+    plot(array['lon'], array['lat'], array['data'])
+
+    # dict_to_nc(array, '../test.nc', 'SIT')
+
 
     #####pickle.dump(array['data'], open('tests/test_results/SSMI_37_GHz_nh.p', 'wb'))
 
