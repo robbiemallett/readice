@@ -1,6 +1,6 @@
 import struct
 import numpy as np
-from read_ice import get_geo_coords
+from readice import get_geo_coords
 from netCDF4 import Dataset
 
 def concentration(file_location, hemisphere, with_coords=False):
