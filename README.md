@@ -15,6 +15,46 @@ pip install read-ice
 
 You can find the documentation for read_ice [here](https://read-ice.readthedocs.io/en/latest/) and a walkthrough video [here](https://www.youtube.com/watch?v=WXEUVK0xgfY).
 
+There are currently three parts of read_ice: `read_file.py` which serves up data from files `get_geo_coords.py`, which gets the relevant longitude/latitude arrays for the data, and `tools.py` code. `tools` includes code to output netcdf4 files and plotting data with Cartopy. 
+
+### Example code to extract SSMI brightness temperature data from an NSIDC binary file, plot it and save it as a netcdf
+
+```python
+
+from read_ice.read_file import SSMI_Tb
+from read_ice.tools import plot, dict_to_nc
+
+# First get the data out of the file. We must specify the location of the file to do this.
+
+# We also want to get the geocoordinates for plotting etc., and those depend on the frequency and the hemisphere.
+# So we supply those to SSMI_Tb too.
+# In order to tell the function to give us the geocoordinates as well as the data itself, we set with_coords=True.
+
+information = SSMI_Tb(file_location='tests/test_files/tb_f17_20190711_v5_n37h.bin',
+                hemisphere='n',
+                frequency=37,
+                with_coords=True)
+
+# Because with_coords=True, information is a dictionary with keys 'data', 'lon', 'lat'. All 2D numpy arrays in this case.
+# If with_coords=False, information would just be a 2D numpy array of the data in the binary file, with no grid.
+
+# the plot function uses cartopy and the matplotlib pcolormesh method. 
+# All three arguments to the function must be 2D arrays. These should be arrays of the same shape.
+# Check out the documentation for how to specify the colormap, scale min and max, bounding latitude and more.
+
+plot(information['lon'], information['lat'], information['data'])
+
+# the dict_to_nc function creates a simple netcdf file with xarray. The function *must take* data in the dictionary format output by the read_file.py script.
+# If you want to specify the contents of this (say, a 365 day long data array for daily data in a year), that's fine. Just keep it in the dict format.
+# You must specify the name of the variable with the variable_name argument. 
+# Other attributes (e.g. year, author) can be supplied in a separate dictionary with the attributes argument (see docs).
+
+dict_to_nc(input_dict=information, 
+           output_file_destination='../test.nc',
+           variable_name='Brightness Temperature')
+
+```
+
 ## Contributing Your Code
 If you have written code to read sea ice files then **please** open a pull request and add it to the package! If you've never done this before, it's easy: [here's a walkthrough for beginners](https://www.freecodecamp.org/news/how-to-make-your-first-pull-request-on-github-3/).
 
