@@ -1,13 +1,13 @@
 Welcome to read_ice's documentation!
 ====================================
 
-.. automodule:: read_ice.read_file
+.. automodule:: readice.read_file
     :members:
 
-.. automodule:: read_ice.get_geo_coords
+.. automodule:: readice.get_geo_coords
     :members:
 
-.. automodule:: read_ice.tools
+.. automodule:: readice.tools
     :members:
 
 .. toctree::
