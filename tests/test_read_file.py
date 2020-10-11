@@ -1,7 +1,7 @@
 import unittest
 import pickle
 import numpy as np
-from read_ice.read_file import SSMI_Tb, concentration, piomas
+from readice.read_file import SSMI_Tb, concentration, piomas
 
 class TestTools(unittest.TestCase):
 

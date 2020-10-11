@@ -1,5 +1,5 @@
 import unittest
-from read_ice.get_geo_coords import get_dims, piomas_grid, polar_stereo
+from readice.get_geo_coords import get_dims, piomas_grid, polar_stereo
 
 class TestTools(unittest.TestCase):
 
