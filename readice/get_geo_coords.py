@@ -25,7 +25,7 @@ def piomas_grid():
     grids = {}
 
     for i in ['lon', 'lat']:
-        grid = np.array(pd.read_csv(f'read_ice/grid_files/pio_{i}grid.dat', header=None, delim_whitespace=True))
+        grid = np.array(pd.read_csv(f'readice/grid_files/pio_{i}grid.dat', header=None, delim_whitespace=True))
 
         flat_grid = grid.ravel()
 
@@ -58,7 +58,7 @@ def polar_stereo(resolution, hemisphere):
 
     for coord in ['lon', 'lat']:
 
-        grid_dir = f'read_ice/grid_files/ps{hemisphere}{res_code}{coord}s_v3.dat'
+        grid_dir = f'readice/grid_files/ps{hemisphere}{res_code}{coord}s_v3.dat'
         with open(grid_dir, mode='rb') as file:
 
             # stored as 4-byte integers (little endian) scaled by 100,000
