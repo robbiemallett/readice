@@ -13,7 +13,7 @@ pip install read-ice
 ```
 ## Documentation & Walkthrough
 
-You can find the documentation for readice [here](https://read-ice.readthedocs.io/en/latest/) and a walkthrough video [here](https://www.youtube.com/watch?v=WXEUVK0xgfY).
+You can find the documentation for readice [here](https://read-ice.readthedocs.io/en/latest/).
 
 There are currently three parts of readice: `read_file.py` which serves up data from files `get_geo_coords.py`, which gets the relevant longitude/latitude arrays for the data, and `tools.py` code. `tools` includes code to output netcdf4 files and plotting data with Cartopy. 
 
